@@ -11,14 +11,13 @@
 		5B456E0B1A04A4DF0017C065 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456E0A1A04A4DF0017C065 /* AppDelegate.m */; };
 		5B456E0E1A04A4DF0017C065 /* posibaiostest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5B456E0C1A04A4DF0017C065 /* posibaiostest.xcdatamodeld */; };
 		5B456E161A04A4DF0017C065 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B456E151A04A4DF0017C065 /* Images.xcassets */; };
-		5B456E191A04A4DF0017C065 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B456E171A04A4DF0017C065 /* LaunchScreen.xib */; };
 		5B456E251A04A4E00017C065 /* posibaiostestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456E241A04A4E00017C065 /* posibaiostestTests.m */; };
 		5B456E341A04A5420017C065 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456E331A04A5420017C065 /* BaseViewController.m */; };
 		5B456E381A04A55D0017C065 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456E361A04A55D0017C065 /* MainViewController.m */; };
 		5B456E391A04A55D0017C065 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B456E371A04A55D0017C065 /* MainViewController.xib */; };
 		5B456E3B1A04B4C60017C065 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B456E3A1A04B4C60017C065 /* QuartzCore.framework */; };
-		5B456E491A04B6720017C065 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B456E461A04B6420017C065 /* libCorePlot-CocoaTouch.a */; };
 		5B456E4D1A04B7A00017C065 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B456E4C1A04B7A00017C065 /* Accelerate.framework */; };
+		5BA760961A05FAE70010B6C5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456E361A04A55D0017C065 /* MainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,20 +27,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 5B456E011A04A4DF0017C065;
 			remoteInfo = posibaiostest;
-		};
-		5B456E451A04B6420017C065 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5B456E3F1A04B6420017C065 /* CorePlot-CocoaTouch.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BC9B83470FB8A0A40035D8DA;
-			remoteInfo = "CorePlot-CocoaTouch";
-		};
-		5B456E471A04B6650017C065 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5B456E3F1A04B6420017C065 /* CorePlot-CocoaTouch.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BC9B83460FB8A0A40035D8DA;
-			remoteInfo = "CorePlot-CocoaTouch";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -63,7 +48,6 @@
 		5B456E361A04A55D0017C065 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = ViewControllers/MainViewController.m; sourceTree = "<group>"; };
 		5B456E371A04A55D0017C065 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainViewController.xib; path = ViewControllers/MainViewController.xib; sourceTree = "<group>"; };
 		5B456E3A1A04B4C60017C065 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		5B456E3F1A04B6420017C065 /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "posibaiostest/External Libraries/CorePlot/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 		5B456E4A1A04B79A0017C065 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		5B456E4C1A04B7A00017C065 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -74,7 +58,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B456E4D1A04B7A00017C065 /* Accelerate.framework in Frameworks */,
-				5B456E491A04B6720017C065 /* libCorePlot-CocoaTouch.a in Frameworks */,
 				5B456E3B1A04B4C60017C065 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,17 +157,8 @@
 		5B456E3E1A04B6220017C065 /* External Libs */ = {
 			isa = PBXGroup;
 			children = (
-				5B456E3F1A04B6420017C065 /* CorePlot-CocoaTouch.xcodeproj */,
 			);
 			name = "External Libs";
-			sourceTree = "<group>";
-		};
-		5B456E401A04B6420017C065 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5B456E461A04B6420017C065 /* libCorePlot-CocoaTouch.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,7 +175,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				5B456E481A04B6650017C065 /* PBXTargetDependency */,
 			);
 			name = posibaiostest;
 			productName = posibaiostest;
@@ -256,12 +229,6 @@
 			mainGroup = 5B456DF91A04A4DF0017C065;
 			productRefGroup = 5B456E031A04A4DF0017C065 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 5B456E401A04B6420017C065 /* Products */;
-					ProjectRef = 5B456E3F1A04B6420017C065 /* CorePlot-CocoaTouch.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				5B456E011A04A4DF0017C065 /* posibaiostest */,
@@ -270,22 +237,11 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXReferenceProxy section */
-		5B456E461A04B6420017C065 /* libCorePlot-CocoaTouch.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libCorePlot-CocoaTouch.a";
-			remoteRef = 5B456E451A04B6420017C065 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
-
 /* Begin PBXResourcesBuildPhase section */
 		5B456E001A04A4DF0017C065 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B456E191A04A4DF0017C065 /* LaunchScreen.xib in Resources */,
 				5B456E391A04A55D0017C065 /* MainViewController.xib in Resources */,
 				5B456E161A04A4DF0017C065 /* Images.xcassets in Resources */,
 			);
@@ -318,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B456E251A04A4E00017C065 /* posibaiostestTests.m in Sources */,
+				5BA760961A05FAE70010B6C5 /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,11 +285,6 @@
 			isa = PBXTargetDependency;
 			target = 5B456E011A04A4DF0017C065 /* posibaiostest */;
 			targetProxy = 5B456E1F1A04A4E00017C065 /* PBXContainerItemProxy */;
-		};
-		5B456E481A04B6650017C065 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "CorePlot-CocoaTouch";
-			targetProxy = 5B456E471A04B6650017C065 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -433,13 +385,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"\"${PROJECT_DIR}/posibaiostest/External Libraries/CorePlot/",
+					"\"${PROJECT_DIR}/posibaiostest/External Libraries/CorePlot/**",
 				);
 				INFOPLIST_FILE = posibaiostest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f2119b97-f914-4502-80d4-1ac7dc7824bd";
@@ -453,13 +408,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"\"${PROJECT_DIR}/posibaiostest/External Libraries/CorePlot/",
+					"\"${PROJECT_DIR}/posibaiostest/External Libraries/CorePlot/**",
 				);
 				INFOPLIST_FILE = posibaiostest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f2119b97-f914-4502-80d4-1ac7dc7824bd";
@@ -519,6 +477,7 @@
 				5B456E2A1A04A4E00017C065 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5B456E2B1A04A4E00017C065 /* Build configuration list for PBXNativeTarget "posibaiostestTests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +486,7 @@
 				5B456E2D1A04A4E00017C065 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

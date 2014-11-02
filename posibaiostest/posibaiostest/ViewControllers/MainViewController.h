@@ -7,10 +7,23 @@
 //
 
 #import "BaseViewController.h"
+#import "CorePlot-CocoaTouch.h"
 
-@interface MainViewController : BaseViewController {
+
+#define NUM_TEST 16
+
+@interface MainViewController : BaseViewController <CPTPlotDataSource> {
     
     IBOutlet UIScrollView *mMainScrollView;
+    CPTXYGraph *mGraph;
+    NSMutableArray *mSamples;
+    double mXXX[NUM_TEST];
+    double mYYY[NUM_TEST];
 }
 
+@property (nonatomic, retain) CPTXYGraph *mGraph;
+@property (nonatomic, retain) NSMutableArray *mSamples;
+@property (nonatomic, retain) CPTGraphHostingView *mHostingView;
+
+- (IBAction)switchShowMode:(id)sender;
 @end
