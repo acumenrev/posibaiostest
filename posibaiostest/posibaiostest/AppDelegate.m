@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import "ModelManager.h"
 
 @interface AppDelegate ()
 
@@ -25,10 +26,15 @@
     [self.window setBackgroundColor:[UIColor whiteColor]];
     [self.window makeKeyAndVisible];
     
+    
+    
     // Init MainViewController
     MainViewController *pMainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
     self.mRootViewController = [[UINavigationController alloc] initWithRootViewController:pMainViewController];
     self.window.rootViewController = self.mRootViewController;
+    
+    // Init singleton instance of ModelManager
+    [ModelManager sharedInstance];
     
     return YES;
 }

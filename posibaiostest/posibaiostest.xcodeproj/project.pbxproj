@@ -11,22 +11,31 @@
 		5B456E0B1A04A4DF0017C065 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456E0A1A04A4DF0017C065 /* AppDelegate.m */; };
 		5B456E0E1A04A4DF0017C065 /* posibaiostest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5B456E0C1A04A4DF0017C065 /* posibaiostest.xcdatamodeld */; };
 		5B456E161A04A4DF0017C065 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B456E151A04A4DF0017C065 /* Images.xcassets */; };
-		5B456E251A04A4E00017C065 /* posibaiostestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456E241A04A4E00017C065 /* posibaiostestTests.m */; };
 		5B456E341A04A5420017C065 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456E331A04A5420017C065 /* BaseViewController.m */; };
 		5B456E381A04A55D0017C065 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456E361A04A55D0017C065 /* MainViewController.m */; };
 		5B456E391A04A55D0017C065 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B456E371A04A55D0017C065 /* MainViewController.xib */; };
 		5B456E3B1A04B4C60017C065 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B456E3A1A04B4C60017C065 /* QuartzCore.framework */; };
 		5B456E4D1A04B7A00017C065 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B456E4C1A04B7A00017C065 /* Accelerate.framework */; };
-		5BA760961A05FAE70010B6C5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456E361A04A55D0017C065 /* MainViewController.m */; };
+		5B6946791A066B6800B341D1 /* DonationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6946781A066B6800B341D1 /* DonationModel.m */; };
+		5B69467C1A066C1D00B341D1 /* ModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B69467B1A066C1D00B341D1 /* ModelManager.m */; };
+		5BBF07AE1A0681D300140BC4 /* posibaiostest.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BBF07AD1A0681D300140BC4 /* posibaiostest.json */; };
+		5BEF8F311A05FFC300F4ACF8 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BEF8F2E1A05FFB800F4ACF8 /* libCorePlot-CocoaTouch.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5B456E1F1A04A4E00017C065 /* PBXContainerItemProxy */ = {
+		5BEF8F2D1A05FFB800F4ACF8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5B456DFA1A04A4DF0017C065 /* Project object */;
+			containerPortal = 5BEF8F271A05FFB800F4ACF8 /* CorePlot-CocoaTouch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BC9B83470FB8A0A40035D8DA;
+			remoteInfo = "CorePlot-CocoaTouch";
+		};
+		5BEF8F2F1A05FFBE00F4ACF8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5BEF8F271A05FFB800F4ACF8 /* CorePlot-CocoaTouch.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 5B456E011A04A4DF0017C065;
-			remoteInfo = posibaiostest;
+			remoteGlobalIDString = BC9B83460FB8A0A40035D8DA;
+			remoteInfo = "CorePlot-CocoaTouch";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -39,7 +48,6 @@
 		5B456E0D1A04A4DF0017C065 /* posibaiostest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = posibaiostest.xcdatamodel; sourceTree = "<group>"; };
 		5B456E151A04A4DF0017C065 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5B456E181A04A4DF0017C065 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		5B456E1E1A04A4E00017C065 /* posibaiostestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = posibaiostestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B456E231A04A4E00017C065 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B456E241A04A4E00017C065 /* posibaiostestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = posibaiostestTests.m; sourceTree = "<group>"; };
 		5B456E321A04A5420017C065 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = ViewControllers/BaseViewController.h; sourceTree = "<group>"; };
@@ -50,6 +58,12 @@
 		5B456E3A1A04B4C60017C065 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5B456E4A1A04B79A0017C065 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		5B456E4C1A04B7A00017C065 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		5B6946771A066B6800B341D1 /* DonationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DonationModel.h; path = Models/DonationModel.h; sourceTree = "<group>"; };
+		5B6946781A066B6800B341D1 /* DonationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DonationModel.m; path = Models/DonationModel.m; sourceTree = "<group>"; };
+		5B69467A1A066C1D00B341D1 /* ModelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelManager.h; path = Manager/ModelManager.h; sourceTree = "<group>"; };
+		5B69467B1A066C1D00B341D1 /* ModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModelManager.m; path = Manager/ModelManager.m; sourceTree = "<group>"; };
+		5BBF07AD1A0681D300140BC4 /* posibaiostest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = posibaiostest.json; sourceTree = "<group>"; };
+		5BEF8F271A05FFB800F4ACF8 /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "CorePlot/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,15 +71,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BEF8F311A05FFC300F4ACF8 /* libCorePlot-CocoaTouch.a in Frameworks */,
 				5B456E4D1A04B7A00017C065 /* Accelerate.framework in Frameworks */,
 				5B456E3B1A04B4C60017C065 /* QuartzCore.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5B456E1B1A04A4E00017C065 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,7 +95,6 @@
 			isa = PBXGroup;
 			children = (
 				5B456E021A04A4DF0017C065 /* posibaiostest.app */,
-				5B456E1E1A04A4E00017C065 /* posibaiostestTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,6 +102,9 @@
 		5B456E041A04A4DF0017C065 /* posibaiostest */ = {
 			isa = PBXGroup;
 			children = (
+				5BBF07AD1A0681D300140BC4 /* posibaiostest.json */,
+				5B6946761A066B3700B341D1 /* Managers */,
+				5B6946751A066B3000B341D1 /* Models */,
 				5B456E311A04A5110017C065 /* ViewControllers */,
 				5B456E091A04A4DF0017C065 /* AppDelegate.h */,
 				5B456E0A1A04A4DF0017C065 /* AppDelegate.m */,
@@ -157,8 +167,35 @@
 		5B456E3E1A04B6220017C065 /* External Libs */ = {
 			isa = PBXGroup;
 			children = (
+				5BEF8F271A05FFB800F4ACF8 /* CorePlot-CocoaTouch.xcodeproj */,
 			);
 			name = "External Libs";
+			sourceTree = "<group>";
+		};
+		5B6946751A066B3000B341D1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5B6946771A066B6800B341D1 /* DonationModel.h */,
+				5B6946781A066B6800B341D1 /* DonationModel.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		5B6946761A066B3700B341D1 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				5B69467A1A066C1D00B341D1 /* ModelManager.h */,
+				5B69467B1A066C1D00B341D1 /* ModelManager.m */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		5BEF8F281A05FFB800F4ACF8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5BEF8F2E1A05FFB800F4ACF8 /* libCorePlot-CocoaTouch.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,29 +212,12 @@
 			buildRules = (
 			);
 			dependencies = (
+				5BEF8F301A05FFBE00F4ACF8 /* PBXTargetDependency */,
 			);
 			name = posibaiostest;
 			productName = posibaiostest;
 			productReference = 5B456E021A04A4DF0017C065 /* posibaiostest.app */;
 			productType = "com.apple.product-type.application";
-		};
-		5B456E1D1A04A4E00017C065 /* posibaiostestTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5B456E2B1A04A4E00017C065 /* Build configuration list for PBXNativeTarget "posibaiostestTests" */;
-			buildPhases = (
-				5B456E1A1A04A4E00017C065 /* Sources */,
-				5B456E1B1A04A4E00017C065 /* Frameworks */,
-				5B456E1C1A04A4E00017C065 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5B456E201A04A4E00017C065 /* PBXTargetDependency */,
-			);
-			name = posibaiostestTests;
-			productName = posibaiostestTests;
-			productReference = 5B456E1E1A04A4E00017C065 /* posibaiostestTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -212,10 +232,6 @@
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = PP3D7A2MP5;
 					};
-					5B456E1D1A04A4E00017C065 = {
-						CreatedOnToolsVersion = 6.1;
-						TestTargetID = 5B456E011A04A4DF0017C065;
-					};
 				};
 			};
 			buildConfigurationList = 5B456DFD1A04A4DF0017C065 /* Build configuration list for PBXProject "posibaiostest" */;
@@ -229,28 +245,37 @@
 			mainGroup = 5B456DF91A04A4DF0017C065;
 			productRefGroup = 5B456E031A04A4DF0017C065 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5BEF8F281A05FFB800F4ACF8 /* Products */;
+					ProjectRef = 5BEF8F271A05FFB800F4ACF8 /* CorePlot-CocoaTouch.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				5B456E011A04A4DF0017C065 /* posibaiostest */,
-				5B456E1D1A04A4E00017C065 /* posibaiostestTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		5BEF8F2E1A05FFB800F4ACF8 /* libCorePlot-CocoaTouch.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libCorePlot-CocoaTouch.a";
+			remoteRef = 5BEF8F2D1A05FFB800F4ACF8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5B456E001A04A4DF0017C065 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BBF07AE1A0681D300140BC4 /* posibaiostest.json in Resources */,
 				5B456E391A04A55D0017C065 /* MainViewController.xib in Resources */,
 				5B456E161A04A4DF0017C065 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5B456E1C1A04A4E00017C065 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,30 +286,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B69467C1A066C1D00B341D1 /* ModelManager.m in Sources */,
 				5B456E0B1A04A4DF0017C065 /* AppDelegate.m in Sources */,
 				5B456E341A04A5420017C065 /* BaseViewController.m in Sources */,
 				5B456E0E1A04A4DF0017C065 /* posibaiostest.xcdatamodeld in Sources */,
+				5B6946791A066B6800B341D1 /* DonationModel.m in Sources */,
 				5B456E381A04A55D0017C065 /* MainViewController.m in Sources */,
 				5B456E081A04A4DF0017C065 /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5B456E1A1A04A4E00017C065 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5B456E251A04A4E00017C065 /* posibaiostestTests.m in Sources */,
-				5BA760961A05FAE70010B6C5 /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5B456E201A04A4E00017C065 /* PBXTargetDependency */ = {
+		5BEF8F301A05FFBE00F4ACF8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5B456E011A04A4DF0017C065 /* posibaiostest */;
-			targetProxy = 5B456E1F1A04A4E00017C065 /* PBXContainerItemProxy */;
+			name = "CorePlot-CocoaTouch";
+			targetProxy = 5BEF8F2F1A05FFBE00F4ACF8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -389,7 +407,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"\"${PROJECT_DIR}/posibaiostest/External Libraries/CorePlot/**",
+					"\"${PROJECT_DIR}/\"/**",
 				);
 				INFOPLIST_FILE = posibaiostest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
@@ -398,6 +416,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f2119b97-f914-4502-80d4-1ac7dc7824bd";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/\"/**";
 			};
 			name = Debug;
 		};
@@ -412,7 +431,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"\"${PROJECT_DIR}/posibaiostest/External Libraries/CorePlot/**",
+					"\"${PROJECT_DIR}/\"/**",
 				);
 				INFOPLIST_FILE = posibaiostest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
@@ -421,40 +440,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f2119b97-f914-4502-80d4-1ac7dc7824bd";
-			};
-			name = Release;
-		};
-		5B456E2C1A04A4E00017C065 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = posibaiostestTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/posibaiostest.app/posibaiostest";
-			};
-			name = Debug;
-		};
-		5B456E2D1A04A4E00017C065 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = posibaiostestTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/posibaiostest.app/posibaiostest";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/\"/**";
 			};
 			name = Release;
 		};
@@ -475,15 +461,6 @@
 			buildConfigurations = (
 				5B456E291A04A4E00017C065 /* Debug */,
 				5B456E2A1A04A4E00017C065 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5B456E2B1A04A4E00017C065 /* Build configuration list for PBXNativeTarget "posibaiostestTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5B456E2C1A04A4E00017C065 /* Debug */,
-				5B456E2D1A04A4E00017C065 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

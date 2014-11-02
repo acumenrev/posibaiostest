@@ -12,9 +12,9 @@
 
 #define NUM_TEST 16
 
-@interface MainViewController : BaseViewController <CPTPlotDataSource> {
-    
-    IBOutlet UIScrollView *mMainScrollView;
+@interface MainViewController : BaseViewController <CPTPlotDataSource, CPTAxisDelegate> {
+    NSArray *mDataArray;
+    IBOutlet UIView *mChartView;
     CPTXYGraph *mGraph;
     NSMutableArray *mSamples;
     double mXXX[NUM_TEST];
