@@ -7,7 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
+                <outlet property="btnNext" destination="DxX-U5-Z70" id="T14-42-xZS"/>
+                <outlet property="btnPrev" destination="rgx-hO-hBj" id="4QD-Ff-det"/>
                 <outlet property="mChartView" destination="hgL-xL-EZX" id="9cf-RN-xOh"/>
+                <outlet property="mYearLabel" destination="KX6-hQ-Z7M" id="bV7-em-CZu"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Es7-IB-xtn">
-                    <rect key="frame" x="223" y="24" width="123" height="29"/>
+                    <rect key="frame" x="8" y="19" width="123" height="29"/>
                     <segments>
                         <segment title="Month"/>
                         <segment title="Year"/>
@@ -30,22 +33,43 @@
                     <rect key="frame" x="0.0" y="60" width="568" height="216"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gbb-4v-ZTI">
-                    <rect key="frame" x="223" y="24" width="123" height="29"/>
-                    <segments>
-                        <segment title="Month"/>
-                        <segment title="Year"/>
-                    </segments>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KX6-hQ-Z7M">
+                    <rect key="frame" x="263" y="22" width="42" height="21"/>
+                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rgx-hO-hBj">
+                    <rect key="frame" x="209" y="18" width="46" height="30"/>
+                    <state key="normal" title="Prev">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
                     <connections>
-                        <action selector="switchShowMode:" destination="-1" eventType="valueChanged" id="mua-AD-3E0"/>
+                        <action selector="btnPrev_Clicked:" destination="-1" eventType="touchUpInside" id="g49-WG-HdU"/>
                     </connections>
-                </segmentedControl>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DxX-U5-Z70">
+                    <rect key="frame" x="313" y="18" width="46" height="30"/>
+                    <state key="normal" title="Next">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnNext_Clicked:" destination="-1" eventType="touchUpInside" id="rvF-uP-A6I"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="hgL-xL-EZX" firstAttribute="top" secondItem="gbb-4v-ZTI" secondAttribute="bottom" constant="8" id="1EZ-nC-Syx"/>
-                <constraint firstItem="Es7-IB-xtn" firstAttribute="centerX" secondItem="hgL-xL-EZX" secondAttribute="centerX" constant="0.5" id="gau-pI-3bI"/>
+                <constraint firstItem="Es7-IB-xtn" firstAttribute="leading" secondItem="hgL-xL-EZX" secondAttribute="leading" constant="8" id="0dm-cN-Cll"/>
+                <constraint firstItem="hgL-xL-EZX" firstAttribute="top" secondItem="rgx-hO-hBj" secondAttribute="bottom" constant="11" id="2SR-LH-b5n"/>
+                <constraint firstItem="KX6-hQ-Z7M" firstAttribute="centerX" secondItem="hgL-xL-EZX" secondAttribute="centerX" id="8O7-gd-Awh"/>
+                <constraint firstItem="hgL-xL-EZX" firstAttribute="centerX" secondItem="rgx-hO-hBj" secondAttribute="centerX" constant="52" id="ISR-S6-Chc"/>
+                <constraint firstItem="hgL-xL-EZX" firstAttribute="top" secondItem="DxX-U5-Z70" secondAttribute="bottom" constant="11" id="SW6-GB-8gY"/>
+                <constraint firstAttribute="trailing" secondItem="hgL-xL-EZX" secondAttribute="trailing" id="dKY-pD-Cbp"/>
+                <constraint firstItem="hgL-xL-EZX" firstAttribute="top" secondItem="KX6-hQ-Z7M" secondAttribute="bottom" constant="16" id="hgK-5U-8cg"/>
+                <constraint firstItem="hgL-xL-EZX" firstAttribute="top" secondItem="Es7-IB-xtn" secondAttribute="bottom" constant="16" id="ioL-kR-wJ3"/>
                 <constraint firstAttribute="bottom" secondItem="hgL-xL-EZX" secondAttribute="bottom" id="jbz-y1-nHH"/>
+                <constraint firstItem="hgL-xL-EZX" firstAttribute="centerX" secondItem="DxX-U5-Z70" secondAttribute="centerX" constant="-52" id="qC9-Ae-M1w"/>
                 <constraint firstItem="hgL-xL-EZX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vEE-Fa-tZO"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

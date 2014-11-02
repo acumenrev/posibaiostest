@@ -65,12 +65,14 @@ static ModelManager *_pSharedInstance = nil;
                 NSDictionary *pMonthDict = (NSDictionary *)[pMonthArray objectAtIndex:nMonthIndex];
                 NSNumber *pMonthValue = (NSNumber *)[pMonthDict objectForKey:@"month"];
                 NSNumber *pValue = (NSNumber *)[pMonthDict objectForKey:@"value"];
-                NSLog(@"Month: %d-%d: %d", pYear.intValue, pMonthValue.intValue, pValue.intValue);
+//                NSLog(@"Month: %d-%d: %d", pYear.intValue, pMonthValue.intValue, pValue.intValue);
                 
                 DonationModel *pDonationModel = [[DonationModel alloc] initWithValue:pValue.doubleValue fromMonth:pMonthValue.intValue andYear:pYear.intValue];
                 [pMonthDataArray addObject:pDonationModel];
+                [pDonationModel release];
             }
             [mData setObject:pMonthDataArray forKey:[NSString stringWithFormat:@"%d",pYear.intValue]];
+            [pMonthDataArray release];
         }
     }
     return YES;

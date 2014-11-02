@@ -10,16 +10,6 @@
 #import "ModelManager.h"
 #import "DonationModel.h"
 
-#define START_POINT 0
-#define END_POINT 15.0
-
-#define X_VAL @"X_VAL"
-#define Y_VAL @"Y_VAL"
-
-#define Y_START_VALUE 0
-#define Y_END_VALUE 100
-#define Y_MAJOR_INCREASEMENT 1
-
 @interface MainViewController ()
 
 @end
@@ -34,14 +24,45 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    // self.automaticallyAdjustsScrollViewInsets
     self.automaticallyAdjustsScrollViewInsets = NO;
-    mDataArray = (NSArray *)[[[ModelManager sharedInstance] mData] objectForKey:@"2011"];
-    for (int i = 1; i <= 12; i++) {
-        [self getMonthStringBasedOnIntValue:i];
+    
+    // Get Years exist in json file
+    NSArray *pYearsArray = (NSArray *)[[[ModelManager sharedInstance] mData] objectForKey:@"years"];
+    for (NSNumber *pYearValue in pYearsArray) {
+        // Get Monthly Data for each year
+        NSArray *pMonthArray = (NSArray *)[[[ModelManager sharedInstance] mData] objectForKey:[NSString stringWithFormat:@"%d", pYearValue.intValue]];
+        // Calculate average sum of value
+        double dTotalValue = 0;
+        for (DonationModel *pDonationData in pMonthArray) {
+            dTotalValue += pDonationData.mValue;
+        }
+        dTotalValue /= pMonthArray.count;
+        // Create a new DonationModel to store average sum value for each year
+        DonationModel *pDonationModel = [[DonationModel alloc] initWithValue:dTotalValue fromMonth:0 andYear:pYearValue.intValue];
+        if (pDonationModel != nil) {
+            if (mYearDataArray == nil) {
+                mYearDataArray = [[NSMutableArray alloc] init];
+            }
+            
+            [mYearDataArray addObject:pDonationModel];
+        }
     }
     
-    [self generateDataSamples];
+    // Choose what will show to user first when display this view controller
+    mShowType = ShowType_Month;
+    if (mShowType == ShowType_Month) {
+        NSArray *pYears = (NSArray *)[[[ModelManager sharedInstance] mData] objectForKey:@"years"];
+        if (pYears.count > 0) {
+            NSNumber *pNumber = (NSNumber *)[pYears objectAtIndex:0];
+            mDataArray = (NSArray *)[[[ModelManager sharedInstance] mData] objectForKey:[NSString stringWithFormat:@"%d", pNumber.intValue]];
+            nSelectedDonationIndex = 0;
+            [mYearLabel setText:[NSString stringWithFormat:@"%d", pNumber.intValue]];
+            [btnPrev setEnabled:NO];
+        }
+        
+    }
+    
+    // Config Graph
     [self configHost];
     [self configGraph];
     [self configAxes];
@@ -56,6 +77,10 @@
 
 - (void)dealloc {
     [mChartView release];
+    [self.mHostingView release];
+    [mYearLabel release];
+    [btnPrev release];
+    [btnNext release];
     [super dealloc];
 }
 
@@ -63,25 +88,19 @@
     return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft);
 }
 
-#pragma mark - Other Methods
-
-- (void) generateDataSamples {
-    double dLength = (END_POINT - START_POINT);
-    double dDelta = dLength/(NUM_TEST - 1);
-    
-    mSamples = [[NSMutableArray alloc] initWithCapacity:NUM_TEST];
-    
-    for (int i = 0; i < NUM_TEST; i++) {
-        double dX = START_POINT + (dDelta*i);
-        
-        // x^2
-        double dY = dX * dX;
-        NSDictionary *pSample = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithDouble:dX], X_VAL,
-                                 [NSNumber numberWithDouble:dY], Y_VAL,nil];
-        [mSamples addObject:pSample];
-    }
+- (BOOL)prefersStatusBarHidden {
+    return NO;
 }
 
+#pragma mark - Other Methods
+
+/**
+ *  Get month string based on given-number
+ *
+ *  @param nValue Month number in integer value
+ *
+ *  @return Month string represent for given-number
+ */
 - (NSString *) getMonthStringBasedOnIntValue:(int)nValue {
     NSString * dateString = [NSString stringWithFormat: @"%d", nValue];
     
@@ -94,7 +113,6 @@
     [formatter setDateFormat:@"MMM"];
     NSString *stringFromDate = [formatter stringFromDate:myDate];
     [formatter release];
-//    NSLog(@"Value %d: %@", nValue,stringFromDate);
     return stringFromDate;
     
 }
@@ -120,11 +138,6 @@
     [pGraph applyTheme:[CPTTheme themeNamed:kCPTPlainWhiteTheme]];
     [self.mHostingView setHostedGraph:pGraph];
     
-    // Set Graph Title
-    NSString *pTitle = @"Chart";
-    [pGraph setTitle:pTitle];
-    [pGraph setTitlePlotAreaFrameAnchor:CPTRectAnchorTop];
-    
     // Create and set text style for the graph
     CPTMutableTextStyle *pTitleStyle = [CPTMutableTextStyle textStyle];
     [pTitleStyle setColor:[CPTColor blackColor]];
@@ -135,9 +148,9 @@
     [pGraph setTitlePlotAreaFrameAnchor:CPTRectAnchorTop];
     
     // Set padding for plot area
-    [pGraph.plotAreaFrame setPaddingLeft:60.0f];
+    [pGraph.plotAreaFrame setPaddingLeft:50.0f];
     [pGraph.plotAreaFrame setPaddingRight:30.0f];
-    [pGraph.plotAreaFrame setPaddingBottom:60.0f];
+    [pGraph.plotAreaFrame setPaddingBottom:40.0f];
     self.mHostingView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     
     // Enable user interaction for plot space
@@ -154,17 +167,33 @@
     CPTGraph *pGraph = self.mHostingView.hostedGraph;
     CPTXYPlotSpace *pPlotSpace = (CPTXYPlotSpace *)pGraph.defaultPlotSpace;
     
-    // Create the three plots
+    // Create the plot
     CPTScatterPlot *pMonthPlot = [[CPTScatterPlot alloc] init];
     [pMonthPlot setDataSource:self];
-    
     [pGraph addPlot:pMonthPlot toPlotSpace:pPlotSpace];
     [pGraph setIdentifier:@"MonthPlot"];
     
-    CPTPlotRange *pGlobalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(20)];
+    CPTColor *pMonthColor = [CPTColor blueColor];
+    
+    CPTMutableLineStyle *pMonthDataLineStyle = [pMonthPlot.dataLineStyle mutableCopy];
+    pMonthDataLineStyle.lineWidth = 2.5;
+    pMonthDataLineStyle.lineColor = pMonthColor;
+    pMonthPlot.dataLineStyle = pMonthDataLineStyle;
+    
+    // Set Global Range for Plot
+    double xRange = 0;
+    double yRange = 105;
+    if (mShowType == ShowType_Month) {
+        xRange = 13;
+    } else {
+        NSArray *pYearsArray = [[[ModelManager sharedInstance] mData] objectForKey:@"years"];
+        xRange = pYearsArray.count + 1;
+    }
+    
+    CPTPlotRange *pGlobalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(yRange)];
     pPlotSpace.globalYRange = pGlobalYRange;
     
-    CPTPlotRange *pGlobalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(20)];
+    CPTPlotRange *pGlobalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(xRange)];
     pPlotSpace.globalXRange = pGlobalXRange;
 }
 /**
@@ -175,20 +204,20 @@
     
     CPTMutableTextStyle *axisTitleStyle = [CPTMutableTextStyle textStyle];
     axisTitleStyle.color = [CPTColor redColor];
-    axisTitleStyle.fontName = @"Helvetica-Bold";
+    axisTitleStyle.fontName = @"Futura";
     axisTitleStyle.fontSize = 12.0f;
     CPTMutableLineStyle *axisLineStyle = [CPTMutableLineStyle lineStyle];
     axisLineStyle.lineWidth = 2.0f;
-    axisLineStyle.lineColor = [CPTColor redColor];
+    axisLineStyle.lineColor = [CPTColor grayColor];
     CPTMutableTextStyle *axisTextStyle = [[CPTMutableTextStyle alloc] init];
-    axisTextStyle.color = [CPTColor redColor];
-    axisTextStyle.fontName = @"Helvetica-Bold";
-    axisTextStyle.fontSize = 11.0f;
+    axisTextStyle.color = [CPTColor blackColor];
+    axisTextStyle.fontName = @"Futura";
+    axisTextStyle.fontSize = 12.0f;
     CPTMutableLineStyle *tickLineStyle = [CPTMutableLineStyle lineStyle];
     tickLineStyle.lineColor = [CPTColor redColor];
     tickLineStyle.lineWidth = 2.0f;
     CPTMutableLineStyle *gridLineStyle = [CPTMutableLineStyle lineStyle];
-    tickLineStyle.lineColor = [CPTColor redColor];
+    tickLineStyle.lineColor = [CPTColor grayColor];
     tickLineStyle.lineWidth = 1.0f;
     
     // Get Axis Set
@@ -196,7 +225,12 @@
     
     // Config X-Axis
     CPTAxis *xAxis = axisSet.xAxis;
-    xAxis.title = @"Months";
+    if (mShowType == ShowType_Month) {
+        xAxis.title = @"Months";
+    } else {
+        xAxis.title = @"Years";
+    }
+    
     xAxis.titleOffset = 20;
     xAxis.labelOffset = 50;
     xAxis.titleTextStyle = axisTextStyle;
@@ -206,26 +240,47 @@
     xAxis.majorTickLength = 1.0f;
     xAxis.majorGridLineStyle = gridLineStyle;
     xAxis.tickDirection = CPTSignNegative;
+    
+    // Customized label on axis
     NSMutableSet *xLabels = [NSMutableSet set];
     NSMutableSet *xLocations = [NSMutableSet set];
-    for (int i = 1; i <= 12; i ++) {
-        NSString *pMonthString = [self getMonthStringBasedOnIntValue:i];
-        CPTAxisLabel *pLabel = [[CPTAxisLabel alloc] initWithText:pMonthString textStyle:xAxis.labelTextStyle];
-        CGFloat location = i - 1;
-        pLabel.tickLocation = CPTDecimalFromCGFloat(location);
-        pLabel.offset = xAxis.majorTickLength;
-        if (pLabel != nil) {
-            [xLabels addObject:pLabel];
-            [xLocations addObject:[NSNumber numberWithFloat:location]];
+    if (mShowType == ShowType_Month) {
+        // Month
+        for (int i = 1; i <= 12; i ++) {
+            NSString *pMonthString = [self getMonthStringBasedOnIntValue:i];
+            CPTAxisLabel *pLabel = [[CPTAxisLabel alloc] initWithText:pMonthString textStyle:xAxis.labelTextStyle];
+            CGFloat location = i - 1;
+            pLabel.tickLocation = CPTDecimalFromCGFloat(location);
+            pLabel.offset = xAxis.majorTickLength;
+            if (pLabel != nil) {
+                [xLabels addObject:pLabel];
+                [xLocations addObject:[NSNumber numberWithFloat:location]];
+            }
+        }
+    } else {
+        // Year
+        for (int i = 0; i < mYearDataArray.count; i++) {
+            DonationModel *pDonationModel = (DonationModel *)[mYearDataArray objectAtIndex:i];
+            NSString *pYearString = [NSString stringWithFormat:@"%d", pDonationModel.mYear];
+            CPTAxisLabel *pLabel = [[CPTAxisLabel alloc] initWithText:pYearString textStyle:xAxis.labelTextStyle];
+            CGFloat location = i;
+            pLabel.tickLocation = CPTDecimalFromCGFloat(location);
+            pLabel.offset = xAxis.majorTickLength;
+            if (pLabel != nil) {
+                [xLabels addObject:pLabel];
+                [xLocations addObject:[NSNumber numberWithFloat:location]];
+            }
+            [pLabel release];
         }
     }
+    // Assign axis labels
     xAxis.axisLabels = xLabels;
     xAxis.majorTickLocations = xLocations;
     
     // Config Y-Axis
     CPTAxis *yAxis = axisSet.yAxis;
     yAxis.title = @"USD";
-    yAxis.titleOffset = -30;
+    yAxis.titleOffset = -45;
     yAxis.labelOffset = 16;
     yAxis.axisLineStyle = axisLineStyle;
     yAxis.titleTextStyle = axisTextStyle;
@@ -236,20 +291,27 @@
     yAxis.majorTickLength = 1.0f;
     yAxis.majorGridLineStyle = gridLineStyle;
     yAxis.tickDirection = CPTSignPositive;
+    yAxis.minorTicksPerInterval = 4;
+    NSInteger majorIncrement = 5000;
+    NSInteger minorIncrement = 1000;
+    CGFloat yMax = 100000.0f;  // should determine dynamically based on max price
     
-    NSInteger majorIncrement = 100;
-    NSInteger minorIncrement = 50;
-    CGFloat yMax = 800.0f;  // should determine dynamically based on max price
-    
+    // Customize axis label
     NSMutableSet *yLabels = [NSMutableSet set];
     NSMutableSet *yMajorLocations = [NSMutableSet set];
     NSMutableSet *yMinorLocations = [NSMutableSet set];
     
     NSInteger xIndex = 0;
-    for (NSInteger i = minorIncrement; i <= yMax; i+= minorIncrement) {
+    for (NSInteger i = 0; i <= yMax; i+= minorIncrement) {
         NSUInteger mod = i % majorIncrement;
         if (mod == 0) {
-            CPTAxisLabel *pLabel = [[CPTAxisLabel alloc] initWithText:[NSString stringWithFormat:@"R%d",i] textStyle:xAxis.labelTextStyle];
+            NSString *pContent;
+            if (xIndex == 0) {
+                pContent = @"0";
+            } else {
+                pContent = [NSString stringWithFormat:@"%dK",xIndex];
+            }
+            CPTAxisLabel *pLabel = [[CPTAxisLabel alloc] initWithText:pContent textStyle:xAxis.labelTextStyle];
             NSDecimal location = CPTDecimalFromInteger(xIndex);
             pLabel.tickLocation = location;
             pLabel.offset = - 30;
@@ -257,15 +319,9 @@
                 [yLabels addObject:pLabel];
             }
             [yMajorLocations addObject:[NSDecimalNumber decimalNumberWithDecimal:location]];
+            [pLabel release];
         } else {
-            CPTAxisLabel *pLabel = [[CPTAxisLabel alloc] initWithText:[NSString stringWithFormat:@"R%d",i] textStyle:xAxis.labelTextStyle];
-            NSDecimal location = CPTDecimalFromInteger(xIndex);
-            pLabel.tickLocation = location;
-            pLabel.offset = - 30;
-            if (pLabel != nil) {
-                [yLabels addObject:pLabel];
-            }
-            [yMinorLocations addObject:[NSDecimalNumber decimalNumberWithDecimal:location]];
+            [yMinorLocations addObject:[NSDecimalNumber numberWithInt:xIndex]];
         }
         xIndex++;
     }
@@ -277,22 +333,45 @@
 #pragma mark - CPTPlot Data Source Methods
 
 - (NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot {
-    return 15;
+    int nCount = 0;
+    if (mShowType == ShowType_Month) {
+        // Months
+        nCount = mDataArray.count;
+    } else {
+        // Years
+        nCount = mYearDataArray.count;
+    }
+    return nCount;
 }
 
 - (id)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index {
-    NSDictionary *pSample = [mSamples objectAtIndex:index];
+    DonationModel *pDonationModel;
+    if (mShowType == ShowType_Month) {
+        pDonationModel = (DonationModel *)[mDataArray objectAtIndex:index];
+    } else {
+        pDonationModel = (DonationModel *)[mYearDataArray objectAtIndex:index];
+    }
     switch (fieldEnum) {
         case CPTScatterPlotFieldX: {
-            if (index < 10) {
+            // Month
+            if (mShowType == ShowType_Month) {
+                return [NSNumber numberWithUnsignedInteger:pDonationModel.mMonth - 1];
+            } else {
                 return [NSNumber numberWithUnsignedInteger:index];
             }
+            
             break;
         }
         case CPTScatterPlotFieldY: {
-            if (index < 10) {
-                return [NSNumber numberWithUnsignedInteger:index];
+            // Value
+            if (mShowType == ShowType_Month) {
+                int nYPlot = pDonationModel.mValue/1000;
+                return [NSNumber numberWithUnsignedInteger:nYPlot];
+            } else {
+                int nYPlot = pDonationModel.mValue/1000;
+                return [NSNumber numberWithUnsignedInteger:nYPlot];
             }
+            
             break;
         }
         default:
@@ -303,14 +382,80 @@
 
 #pragma mark - Axis Delegate
 
+- (IBAction)btnNext_Clicked:(id)sender {
+    if (nSelectedDonationIndex < mYearDataArray.count - 1) {
+        nSelectedDonationIndex++;
+    }
+    
+    if (nSelectedDonationIndex == mYearDataArray.count - 1) {
+        [btnNext setEnabled:false];
+    } else if (nSelectedDonationIndex < mYearDataArray.count - 1) {
+        [btnNext setEnabled:true];
+    }
+    [btnPrev setEnabled:true];
+    DonationModel *pModel = (DonationModel *)[mYearDataArray objectAtIndex:nSelectedDonationIndex];
+    [mYearLabel setText:[NSString stringWithFormat:@"%d", pModel.mYear]];
+    NSArray *pYears = (NSArray *)[[[ModelManager sharedInstance] mData] objectForKey:@"years"];
+    if (pYears.count > 0) {
+        NSNumber *pNumber = (NSNumber *)[pYears objectAtIndex:nSelectedDonationIndex];
+        mDataArray = (NSArray *)[[[ModelManager sharedInstance] mData] objectForKey:[NSString stringWithFormat:@"%d", pNumber.intValue]];
+    }
+    [self performSelectorOnMainThread:@selector(forceReloadData) withObject:nil waitUntilDone:NO];
+}
+
+- (IBAction)btnPrev_Clicked:(id)sender {
+    if (nSelectedDonationIndex >= 1) {
+        nSelectedDonationIndex--;
+    }
+    
+    if (nSelectedDonationIndex == 0) {
+        [btnPrev setEnabled:false];
+    } else if (nSelectedDonationIndex >= 1) {
+        [btnPrev setEnabled:true];
+    }
+    [btnNext setEnabled:true];
+    
+    DonationModel *pModel = (DonationModel *)[mYearDataArray objectAtIndex:nSelectedDonationIndex];
+    [mYearLabel setText:[NSString stringWithFormat:@"%d", pModel.mYear]];
+    NSArray *pYears = (NSArray *)[[[ModelManager sharedInstance] mData] objectForKey:@"years"];
+    if (pYears.count > 0) {
+        NSNumber *pNumber = (NSNumber *)[pYears objectAtIndex:nSelectedDonationIndex];
+        mDataArray = (NSArray *)[[[ModelManager sharedInstance] mData] objectForKey:[NSString stringWithFormat:@"%d", pNumber.intValue]];
+    }
+    [self performSelectorOnMainThread:@selector(forceReloadData) withObject:nil waitUntilDone:NO];
+    
+}
 
 - (IBAction)switchShowMode:(id)sender {
     UISegmentedControl *pSegmentControl = (UISegmentedControl *)sender;
     if (pSegmentControl.selectedSegmentIndex == 0) {
-        NSLog(@"Month");
+        mShowType = ShowType_Month;
+        // Show Buttons
+        [btnPrev setHidden:NO];
+        [btnNext setHidden:NO];
+        [mYearLabel setHidden:NO];
+        [self performSelectorOnMainThread:@selector(forceReloadData) withObject:nil waitUntilDone:NO];
     } else {
-        NSLog(@"Years");
+        mShowType = ShowType_Year;
+        
+        // Hide buttons
+        [btnPrev setHidden:YES];
+        [btnNext setHidden:YES];
+        [mYearLabel setHidden:YES];
+        
+        [self performSelectorOnMainThread:@selector(forceReloadData) withObject:nil waitUntilDone:NO];
     }
+}
+
+/**
+ *  Reload data on chart
+ */
+- (void) forceReloadData {
+    
+    // Reload Axis
+    [self configAxes];
+    // Reload Data
+    [self.mHostingView.hostedGraph reloadData];
 }
 
 
